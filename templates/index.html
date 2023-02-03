@@ -1,0 +1,27 @@
+<a href="/new/pokémon">New Pokémon</a>
+<a href="/new/type">New Pokémon Type</a>
+<a href="/new/ability">New Pokémon Ability</a>
+<style>
+table, th, td {
+	margin: 3px;
+	border: 1px solid black;
+}
+</style>
+<table>
+{% for element in elementals %}
+<tr>
+	{% for data in element %}	
+	<td> {{ data }} </td>
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<table>
+{% for monster in monsters %}
+<tr>
+	{% for data in monster %}	
+	<td> {{ data }} </td>
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>

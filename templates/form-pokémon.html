@@ -1,0 +1,18 @@
+{% extends "form.html" %}
+
+{% block rest %}
+
+<p>Primary type
+{% for t in types %}
+<p>{{ t.name }}
+<input type="radio" name="type1" value="{{ t.id }}">
+{% endfor %}
+
+<p>Secondary type
+{% for t in types %}
+<p>{{ t.name }}
+<input type="radio" name="type2" value="{{ t.id }}">
+{% endfor %}
+
+<br>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "form.html" %}
+
+{% block rest %}
+<p>Super effective
+{% for t in types %}
+<p>t.name
+<input type="checkbox" name="effective">
+{% endfor %}
+<p>Not very effective
+{% for t in types %}
+<p>t.name
+<input type="checkbox" name="ineffective">
+{% endfor %}
+<p>Weakness
+{% for t in types %}
+<p>t.name
+<input type="checkbox" name="weakness">
+{% endfor %}
+<p>Resistance
+{% for t in types %}
+<p>t.name
+<input type="checkbox" name="resistance">
+{% endfor %}
+{% endblock %}

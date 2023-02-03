@@ -1,0 +1,6 @@
+<form action="/{{ action }}" method="POST">
+	Nimi
+	<input type="text" name="name">
+	{% block rest %}{% endblock %}
+	<input type="submit" value="Lähetä tiedot">
+</form>
