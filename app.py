@@ -24,6 +24,14 @@ def index():
     monsters = result.fetchall()
     return render_template("index.html", elementals=elementals, monsters=monsters)
 
+@app.route("/search/<predicate>")
+def search(predicate):
+    field, value = tuple(predicate.split("="))
+    if field == "name" or True:
+        sql = text("SELECT * FROM Monsters WHERE species=:query")
+        result = db.session.execute(sql, {"query": value})
+        return str(result.fetchall())
+
 @app.route("/new/<data_type>")
 def new(data_type):
     sql = text("SELECT * FROM Types")
