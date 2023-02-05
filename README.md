@@ -7,9 +7,15 @@ Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on poké
 3. Alusta tietokannan taulukot: `psql < schema.sql`
 4. Käynnistä komennolla: `flask run`
 
+Voi myös lisätä kokeiludataa: `psql < test-data.sql`
+
 ## Tietokantaan tiedon lisäämiset
-- [ ] Tietokantaan voi lisätä Pokèmoneja (Laji, Tyyppi1, Tyyppi2, Kyky1, Kyky2, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys)
-- [ ] Tietokantaan voi lisätä Kykyjä (Kuvaus) 
+- [ ] Tietokantaan voi lisätä Pokèmoneja - Laji, Tyyppi1, Tyyppi2, Kyky1, Kyky2, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys
+  - [x] Laji
+  - [x] Tyyppi1 ja tyyppi2 (mietin että tän voi erotella omaksi listaksi, koska kaikilla pokémoneilla ei oo kahta tyyppiä :S)
+  - [ ] Kyvyt (sama on siis kyvyillä)
+  - [ ] Loput...
+- [x] Tietokantaan voi lisätä Kykyjä - Nimi, [Kuvaus]
 - [ ] Tietokantaan voi lisätä Iskuja (Tyyppi, Voima, Osumisen todennäköisyys, Vaikutuksen todennäköisyys, Vaikutus)
 - [ ] Tietokantaan voi lisätä Iskun vaikutuksia (Kuvaus)
 - [ ] Pokémoneille voi lisätä Iskuja (Pokémon, Isku, Oppimistaso)
@@ -17,6 +23,9 @@ Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on poké
 
 ## Tietokannasta tiedon hakeminen
 - [ ] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen
+  - [x] Nimen suhteen "/search/name=<inserted-name>".
+  - [ ] Muut lausekkeet (tietoalueet ja epäyhtälöt)
+  - [ ] Hakemiskenttä
 - [ ] Pokémonilta voi hakea kehitysmuodot
 - [ ] Iskuja voi hakea predikaatin suhteen
 - [ ] Hakujen tulokset voi uudelleenjärjestää ominaisuuden suhteen
