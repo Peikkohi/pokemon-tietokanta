@@ -56,7 +56,7 @@ def new(data_type):
 def send(param):
     source = {
         "pokémon": """
-            INSERT INTO Monsters (name, type1, type2) VALUES
+            INSERT INTO Monsters (species, type1, type2) VALUES
                 (:name, :type1, :type2);
         """,
         "type": "INSERT INTO Types (name) VALUES (:name)",
