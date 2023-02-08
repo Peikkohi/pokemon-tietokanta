@@ -1,0 +1,16 @@
+<style>
+table, th, td {
+	margin: 3px;
+	border: 1px solid black;
+}
+</style>
+<table>
+{% for row in query %}
+<tr>
+	{% for field in row %}	
+	<td> {{ field }} </td>
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<a href="/">takaisin</a>

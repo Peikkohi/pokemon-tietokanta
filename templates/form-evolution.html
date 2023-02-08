@@ -1,0 +1,16 @@
+{% extends 'form.html' %}
+{% block rest %}
+<h2>{% block title %}Lisää kehitystiedot{% endblock %}</h2>
+<p>Kehittyjä:
+{% for id, name in monsters %}
+<label>{{ name }}
+<input type="radio" name="child" value="{{ id }}">
+{% endfor %}
+<P>Kehittynyt:
+{% for id, name in monsters %}
+<label>{{ name }}
+<input type="radio" name="parent" value="{{ id }}">
+{% endfor %}
+<p>Kehitysmenetelmä:
+<input type="text" name="method">
+{% endblock %}

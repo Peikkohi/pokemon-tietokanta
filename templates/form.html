@@ -1,6 +1,9 @@
+<!DOCTYPE html>
+<title>{% block title %}{% endblock %}</title>
 <form action="/{{ action }}" method="POST">
-	Nimi
-	<input type="text" name="name">
-	{% block rest %}{% endblock %}
+	<div>
+		{% block rest %}{% endblock %}
+	</div><br>
 	<input type="submit" value="Lähetä tiedot">
+	<a href="/">Takaisin</a>
 </form>

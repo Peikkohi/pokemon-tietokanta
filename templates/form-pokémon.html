@@ -1,18 +1,10 @@
-{% extends "form.html" %}
-
+{% extends 'form.html' %}
 {% block rest %}
-
-<p>Primary type
-{% for t in types %}
-<p>{{ t.name }}
-<input type="radio" name="type1" value="{{ t.id }}">
-{% endfor %}
-
-<p>Secondary type
-{% for t in types %}
-<p>{{ t.name }}
-<input type="radio" name="type2" value="{{ t.id }}">
-{% endfor %}
-
-<br>
+<h2>{% block title %}Lisää Pokémon tiedot{% endblock %}</h2>
+<p>Nimi<br>
+<input type="text" name="name">
+<p>Ensisijainen tyypitys<br>
+<input type="text" name="type1">
+<p>Toissijainen tyypitys<br>
+<input type="text" name="type2">
 {% endblock %}

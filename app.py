@@ -10,59 +10,72 @@ db = SQLAlchemy(app)
 
 @app.route("/")
 def index():
-    sql = text("SELECT * FROM Types")
-    result = db.session.execute(sql)
-    elementals = result.fetchall()
-    sql = text("""
-    SELECT
-        species,
-        (SELECT name FROM Types WHERE id=type1),
-        (SELECT name FROM Types WHERE id=type2)
-    FROM Monsters;
-    """)
-    result = db.session.execute(sql)
-    monsters = result.fetchall()
-    return render_template("index.html", elementals=elementals, monsters=monsters)
+    return render_template("index.html", links=[
+        ("new/pokémon", "Lisää Pokémon"),
+        ("new/move", "Lisää Pokémonliike"),
+        ("new/evolution", "Lisää kehitys"),
+    ])
 
 @app.route("/search/<predicate>")
 def search(predicate):
-    field, value = tuple(predicate.split("="))
-    if field == "name" or True:
-        sql = text("SELECT * FROM Monsters WHERE species=:query")
-        result = db.session.execute(sql, {"query": value})
-        return str(result.fetchall())
-
-@app.route("/new/<data_type>")
-def new(data_type):
-    sql = text("SELECT * FROM Types")
+    # TODO with regexp, less hacky
+    if ";" in predicate:
+        return "predicate contains \";\""
+    
+    sql = text("""
+    SELECT
+        name, CONCAT(type1, type2)
+    FROM Monsters WHERE %s;
+    """ % predicate)
     result = db.session.execute(sql)
-    data = result.fetchall()
+    return render_template("show-table.html", query=result.fetchall())
 
-    template, form = {
-        "pokémon": ("form-pokémon.html", {
-            "action": "send/pokémon",
-            "types": data,
-        }),
-        "type": ("form.html", {
-            "action": "send/type",
-        }),
-        "ability": ("form.html", {
-            "action": "send/ability",
-        }),
-    }.get(data_type) or ("invalid.html", None)
-    return render_template(template, **form)
+@app.route("/new/<form>")
+def new(form):
+    match form:
+        case "move":
+            return render_template("form-move.html", action="send-move")
+        case "pokémon":
+            return render_template("form-pokémon.html", action="send-pokémon")
+        case "evolution":
+            sql = text("""
+            SELECT id, name FROM Monsters;
+            """)
+            result = db.session.execute(sql)
+            return render_template(
+                "form-evolution.html",
+                action="send-evolution",
+                monsters=result.fetchall(),
+            )
+        case other:
+            return render_template("invalid.html", form=form)
 
-@app.route("/send/<param>", methods=["POST"])
-def send(param):
-    source = {
-        "pokémon": """
-            INSERT INTO Monsters (species, type1, type2) VALUES
-                (:name, :type1, :type2);
-        """,
-        "type": "INSERT INTO Types (name) VALUES (:name)",
-        "ability": "INSERT INTO Abilities (name) VALUES (:name)",
-    }.get(param)
-    sql = text(source)
+@app.route("/send-pokémon", methods=["POST"])
+def send_pokemon():
+    sql = text("""
+    INSERT INTO Monsters (name, type1, type2)
+    VALUES (:name, :type1, :type2);
+    """)
+    db.session.execute(sql, request.form)
+    db.session.commit()
+    return redirect("/")
+
+@app.route("/send-move", methods=["POST"])
+def send_move():
+    sql = text("""
+    INSERT INTO Moves (name, description)
+    VALUES (:name, :description);
+    """)
+    db.session.execute(sql, request.form)
+    db.session.commit()
+    return redirect("/")
+
+@app.route("/send-evolution", methods=["POST"])
+def send_evolution():
+    sql = text("""
+    INSERT INTO Evolutions (child, parent, method)
+    VALUES (:child, :parent, :method);
+    """)
     db.session.execute(sql, request.form)
     db.session.commit()
     return redirect("/")
