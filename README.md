@@ -4,10 +4,11 @@ Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on poké
 ## Sovelluksen käyttöönotto
 1. Lataa vaatimukset: `pip3 install -r requirements.txt`
 2. On syytä myös asentaa version PostgreSQL:stä
-3. Alusta tietokannan taulukot: `psql < schema.sql`
-4. Käynnistä komennolla: `flask run`
+3. Lisää `.env` tiedosto johon määrittele ympäristö muuttuja `DATABASE_URL`, joka on reitti tietokantaasi
+4. Alusta tietokannan taulukot: `psql -d [tietokanta] < schema.sql`
+5. Käynnistä komennolla: `flask run`
 
-Voi myös lisätä kokeiludataa: `psql < test-data.sql`
+Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`
 
 ## Tietokantaan tiedon lisäämiset
 - [ ] Tietokantaan voi lisätä Pokèmoneja - Laji, Tyyppi1, Tyyppi2, Kyky1, Kyky2, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys
@@ -23,7 +24,7 @@ Voi myös lisätä kokeiludataa: `psql < test-data.sql`
 
 ## Tietokannasta tiedon hakeminen
 - [ ] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen
-  - [x] Nimen suhteen "/search/name=<inserted-name>".
+  - [x] Nimen suhteen "/search/name=[inserted-name]".
   - [ ] Muut lausekkeet (tietoalueet ja epäyhtälöt)
   - [ ] Hakemiskenttä
 - [ ] Pokémonilta voi hakea kehitysmuodot
