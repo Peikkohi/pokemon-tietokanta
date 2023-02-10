@@ -1,6 +1,8 @@
 from flask import redirect, render_template, request
+import itertools
+
 from app import app
-from querys import execute, commit, insert_matchup
+import database
 
 @app.route("/")
 def index():
@@ -18,12 +20,8 @@ def search(predicate):
         if char in predicate:
             return "predicate contains: " + char
     
-    result = execute("""
-    SELECT
-        name, CONCAT(type1, type2)
-    FROM Monsters WHERE %s;
-    """ % predicate)
-    return render_template("show-table.html", query=result.fetchall())
+    monsters = database.filter(predicate)
+    return render_template("show-table.html", query=monsters)
 
 @app.route("/new/move")
 def new():
@@ -35,66 +33,53 @@ def new_pokemon():
 
 @app.route("/new/evolution")
 def new_evolution():
-    result = execute("SELECT id, name FROM Monsters")
     return render_template(
         "form-evolution.html",
         action="send/evolution",
-        monsters=result.fetchall(),
+        monsters=database.pokemon(),
     )
 
 @app.route("/new/type")
 def new_type():
-    result = execute("SELECT id, name FROM Types")
     return render_template(
         "form-types.html",
         action="send/type",
-        types=result.fetchall(),
+        types=database.types(),
     )
 
 @app.route("/send/pokémon", methods=["POST"])
 def send_pokemon():
-    execute("""
-    INSERT INTO Monsters (name, type1, type2)
-    VALUES (:name, :type1, :type2);
-    """, **request.form)
-    commit()
+    database.insert_pokemon(**request.form)
     return redirect("/")
 
 @app.route("/send/move", methods=["POST"])
 def send_move():
-    execute("""
-    INSERT INTO Moves (name, description)
-    VALUES (:name, :description);
-    """, **request.form)
-    commit()
+    database.insert_moves(**request.form)
     return redirect("/")
 
 @app.route("/send/evolution", methods=["POST"])
 def send_evolution():
-    execute("""
-    INSERT INTO Evolutions (child, parent, lvl)
-    VALUES (:child, :parent, :lvl);
-    """, **request.form)
-    commit()
+    database.insert_evolution(**request.form)
     return redirect("/")
 
 @app.route("/send/type", methods=["POST"])
 def send_type():
-    sql = "INSERT INTO Types (name) VALUES (:name) RETURNING id"
-    result = execute(sql, **request.form).fetchone()[0]
-    
     def to_list(val):
         if type(val) == list:
             return val
         else:
             return [val] if val else []
-    def get_request(name):
+    def field(name):
         return to_list(request.form.get(name))
-    insert_matchup(result, get_request("effective"), "defender", True)
-    insert_matchup(result, get_request("weakness"), "attacker", True)
-
-    insert_matchup(result, get_request("ineffective"), "defender", False)
-    insert_matchup(result, get_request("resistance"), "attacker", False)
-
-    commit()
+    database.insert_types(
+        name=request.form["name"],
+        defenders=itertools.chain(
+            zip(field("effective"), itertools.repeat(True)),
+            zip(field("ineffective"), itertools.repeat(False))
+        ),
+        attackers=itertools.chain(
+            zip(field("weakness"), itertools.repeat(True)),
+            zip(field("resistance"), itertools.repeat(False))
+        )
+    )
     return redirect("/")
