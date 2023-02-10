@@ -1,16 +1,19 @@
 {% extends 'form.html' %}
 {% block rest %}
 <h2>{% block title %}Lisää kehitystiedot{% endblock %}</h2>
-<p>Kehittyjä:
+<select name="child">
 {% for id, name in monsters %}
-<label>{{ name }}
-<input type="radio" name="child" value="{{ id }}">
+<option value="{{ id }}">{{ name }}</option>
 {% endfor %}
-<P>Kehittynyt:
+</select>
+&rarr;
+<select name="parent">
 {% for id, name in monsters %}
-<label>{{ name }}
-<input type="radio" name="parent" value="{{ id }}">
+<option value="{{ id }}">{{ name }}</option>
 {% endfor %}
-<p>Kehitysmenetelmä:
-<input type="text" name="method">
+</select>
+<div style="padding: 1mm;">
+<label>Kehitystaso:</label>
+<input type="number" name="lvl">
+</div>
 {% endblock %}

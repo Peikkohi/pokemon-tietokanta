@@ -73,8 +73,8 @@ def send_move():
 @app.route("/send-evolution", methods=["POST"])
 def send_evolution():
     sql = text("""
-    INSERT INTO Evolutions (child, parent, method)
-    VALUES (:child, :parent, :method);
+    INSERT INTO Evolutions (child, parent, lvl)
+    VALUES (:child, :parent, :lvl);
     """)
     db.session.execute(sql, request.form)
     db.session.commit()

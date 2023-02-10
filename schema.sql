@@ -33,5 +33,5 @@ CREATE TABLE Moves (
 CREATE TABLE Evolutions (
 	child SERIAL REFERENCES Monsters,
 	parent SERIAL REFERENCES Monsters,
-	method TEXT
+	lvl INTEGER
 );
