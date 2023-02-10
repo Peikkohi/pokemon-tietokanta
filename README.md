@@ -16,7 +16,7 @@ Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`
   - [x] Tyyppi1 ja tyyppi2 (mietin että tän voi erotella omaksi listaksi, koska kaikilla pokémoneilla ei oo kahta tyyppiä :S)
   - [ ] Kyvyt (sama on siis kyvyillä)
   - [ ] Loput...
-- [x] Tietokantaan voi lisätä Kykyjä - Nimi, [Kuvaus]
+- [ ] Tietokantaan voi lisätä Kykyjä - Nimi, [Kuvaus]
 - [ ] Tietokantaan voi lisätä Iskuja (Tyyppi, Voima, Osumisen todennäköisyys, Vaikutuksen todennäköisyys, Vaikutus)
 - [ ] Tietokantaan voi lisätä Iskun vaikutuksia (Kuvaus)
 - [ ] Pokémoneille voi lisätä Iskuja (Pokémon, Isku, Oppimistaso)
@@ -24,8 +24,7 @@ Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`
 
 ## Tietokannasta tiedon hakeminen
 - [ ] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen
-  - [x] Nimen suhteen "/search/name=[inserted-name]".
-  - [ ] Muut lausekkeet (tietoalueet ja epäyhtälöt)
+  - [x] Voi laittaa SQL totuuslausekkeen (URL: /search/[name='Charizard'])
   - [ ] Hakemiskenttä
 - [ ] Pokémonilta voi hakea kehitysmuodot
 - [ ] Iskuja voi hakea predikaatin suhteen
