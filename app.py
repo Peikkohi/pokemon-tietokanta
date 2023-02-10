@@ -14,6 +14,7 @@ def index():
         ("new/pokémon", "Lisää Pokémon"),
         ("new/move", "Lisää Pokémonliike"),
         ("new/evolution", "Lisää kehitys"),
+        ("new/type", "Lisää tyypitys"),
     ])
 
 @app.route("/search/<predicate>")
@@ -46,6 +47,16 @@ def new(form):
                 "form-evolution.html",
                 action="send-evolution",
                 monsters=result.fetchall(),
+            )
+        case "type":
+            sql = text("""
+            SELECT id, name FROM Types;
+            """)
+            result = db.session.execute(sql)
+            return render_template(
+                "form-types.html",
+                action="send-type",
+                types=result.fetchall(),
             )
         case other:
             return render_template("invalid.html", form=form)
@@ -80,3 +91,28 @@ def send_evolution():
     db.session.commit()
     return redirect("/")
 
+@app.route("/send-type", methods=["POST"])
+def send_type():
+    sql = text("""
+    INSERT INTO Types (name) VALUES (:name) RETURNING id;
+    """)
+    result = db.session.execute(sql, request.form).fetchone()[0]
+    sql = text("""
+    INSERT INTO Matchups (attacker, defender, advantage)
+    VALUES (:attacker, :defender, :advantage);
+    """)
+    insert = {"attacker": result, "defender": result}
+    insert["advantage"] = True
+    for id in request.form.get("effective") or []:
+        db.session.execute(sql, insert | {"defender": id})
+    for id in request.form.get("weakness") or []:
+        db.session.execute(sql, insert | {"attacker": id})
+
+    insert["advantage"] = False
+    for id in request.form.get("ineffective") or []:
+        db.session.execute(sql, insert | {"defender": id})
+    for id in request.form.get("resistance") or []:
+        db.session.execute(sql, insert | {"attacker": id})
+
+    db.session.commit()
+    return redirect("/")

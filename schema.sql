@@ -1,12 +1,12 @@
---CREATE TABLE Types (
-	--id SERIAL PRIMARY KEY,
-	--name TEXT
---);
---CREATE TABLE Matchups (
-	--attacker SERIAL REFERENCES Types,
-	--defender SERIAL REFERENCES Types,
-	--effective BOOLEAN
---);
+CREATE TABLE Types (
+	id SERIAL PRIMARY KEY,
+	name TEXT
+);
+CREATE TABLE Matchups (
+	attacker SERIAL REFERENCES Types,
+	defender SERIAL REFERENCES Types,
+	advantage BOOLEAN
+);
 CREATE TABLE Monsters (
 	id SERIAL PRIMARY KEY,
 	name TEXT,

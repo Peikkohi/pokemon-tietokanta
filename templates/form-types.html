@@ -1,0 +1,28 @@
+{% extends 'form.html' %}
+{% block rest %}
+<h2>{% block title %}Lisää tyypityksen tiedot{% endblock %}</h2>
+<p>Tyypin nimi</p>
+<input type="text" name="name"> 
+{% if types %}
+<p>Hyökätessä</p>
+<p>Hyvä - Huono</p>
+{% endif %}
+{% for id, name in types %}
+<div>
+<input type="checkbox" name="effective" value="{{ id }}">
+<input type="checkbox" name="ineffective" value="{{ id }}">
+<label>{{ name }}
+</div>
+{% endfor %}
+{% if types %}
+<p>Puolustaessa</p>
+<p>Hyvä - Huono</p>
+{% endif %}
+{% for id, name in types %}
+<div>
+<input type="checkbox" name="resistance" value="{{ id }}">
+<input type="checkbox" name="weakness" value="{{ id }}">
+<label>{{ name }}
+</div>
+{% endfor %}
+{% endblock %}
