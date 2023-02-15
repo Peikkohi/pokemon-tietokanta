@@ -5,7 +5,8 @@ CREATE TABLE Types (
 CREATE TABLE Matchups (
 	attacker SERIAL REFERENCES Types,
 	defender SERIAL REFERENCES Types,
-	advantage BOOLEAN
+	advantage BOOLEAN,
+	PRIMARY KEY (attacker, defender)
 );
 CREATE TABLE Pokemon (
 	id SERIAL PRIMARY KEY,
