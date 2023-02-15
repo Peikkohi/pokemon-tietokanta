@@ -2,13 +2,13 @@
 {% block rest %}
 <h2>{% block title %}Lisää kehitystiedot{% endblock %}</h2>
 <select name="child">
-{% for id, name in monsters %}
+{% for id, name in pokemon %}
 <option value="{{ id }}">{{ name }}</option>
 {% endfor %}
 </select>
 &rarr;
 <select name="parent">
-{% for id, name in monsters %}
+{% for id, name in pokemon %}
 <option value="{{ id }}">{{ name }}</option>
 {% endfor %}
 </select>

@@ -18,8 +18,8 @@ def search(predicate):
         if char in predicate:
             return "predicate contains: " + char
     
-    monsters = database.filter(predicate)
-    return render_template("show-table.html", query=monsters)
+    pokemon = database.filter(predicate)
+    return render_template("show-table.html", query=pokemon)
 
 @app.route("/new/move")
 def new():
@@ -34,7 +34,7 @@ def new_evolution():
     return render_template(
         "form-evolution.html",
         action="send/evolution",
-        monsters=database.pokemon(),
+        pokemon=database.pokemon(),
     )
 
 @app.route("/new/type")

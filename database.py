@@ -12,16 +12,21 @@ def filter(predicate):
     return execute("""
     SELECT
         name, CONCAT(type1, type2)
-    FROM Monsters WHERE %s;
+    FROM Pokemon WHERE %s;
     """ % predicate).fetchall()
 
 def pokemon():
-    return execute("SELECT id, name FROM Monsters;").fetchall()
+    return execute("SELECT id, name FROM Pokemon;").fetchall()
 
 def insert_pokemon(**kwargs):
     execute("""
-    INSERT INTO Monsters (name, type1, type2)
-    VALUES (:name, :type1, :type2);
+    INSERT INTO Pokemon (
+        name, type1, type2,
+        health, attack, defence, spc_att, spc_def, speed
+    ) VALUES (
+        :name, :type1, :type2,
+        :health, :attack, :defence, :spc_att, :spc_def, :speed
+    );
     """, **kwargs)
     commit()
 

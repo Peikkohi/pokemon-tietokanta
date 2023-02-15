@@ -7,19 +7,19 @@ CREATE TABLE Matchups (
 	defender SERIAL REFERENCES Types,
 	advantage BOOLEAN
 );
-CREATE TABLE Monsters (
+CREATE TABLE Pokemon (
 	id SERIAL PRIMARY KEY,
 	name TEXT,
-	type1 TEXT, --SERIAL REFERENCES Types,
-	type2 TEXT --SERIAL REFERENCES Types
+	type1 SERIAL REFERENCES Types,
+	type2 SERIAL REFERENCES Types,
 	--ability1 TEXT,
 	--ability2 TEXT,
-	--health INTEGER,
-	--attack INTEGER,
-	--defence INTEGER,
-	--spc_att INTEGER,
-	--spc_def INTEGER,
-	--speed INTEGER
+	health INTEGER,
+	attack INTEGER,
+	defence INTEGER,
+	spc_att INTEGER,
+	spc_def INTEGER,
+	speed INTEGER
 );
 --CREATE TABLE Abilities (
 	--id SERIAL PRIMARY KEY,
@@ -31,7 +31,7 @@ CREATE TABLE Moves (
 	description TEXT
 );
 CREATE TABLE Evolutions (
-	child SERIAL REFERENCES Monsters,
-	parent SERIAL REFERENCES Monsters,
+	child SERIAL REFERENCES Pokemon,
+	parent SERIAL REFERENCES Pokemon,
 	lvl INTEGER
 );
