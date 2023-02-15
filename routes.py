@@ -1,5 +1,4 @@
 from flask import redirect, render_template, request
-import itertools
 
 from app import app
 import database
@@ -15,7 +14,6 @@ def index():
 
 @app.route("/search/<predicate>")
 def search(predicate):
-    # TODO with regexp, less hacky
     for char in ";()":
         if char in predicate:
             return "predicate contains: " + char
@@ -64,22 +62,15 @@ def send_evolution():
 
 @app.route("/send/type", methods=["POST"])
 def send_type():
-    def to_list(val):
-        if type(val) == list:
-            return val
-        else:
-            return [val] if val else []
-    def field(name):
-        return to_list(request.form.get(name))
     database.insert_types(
         name=request.form["name"],
-        defenders=itertools.chain(
-            zip(field("effective"), itertools.repeat(True)),
-            zip(field("ineffective"), itertools.repeat(False))
+        defenders=(
+            (True, request.form.getlist("effective")),
+            (False, request.form.getlist("ineffective")),
         ),
-        attackers=itertools.chain(
-            zip(field("weakness"), itertools.repeat(True)),
-            zip(field("resistance"), itertools.repeat(False))
+        attackers=(
+            (True, request.form.getlist("weakness")),
+            (False, request.form.getlist("resistance"))
         )
     )
     return redirect("/")

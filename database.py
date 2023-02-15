@@ -8,6 +8,7 @@ def commit():
     db.session.commit()
 
 def filter(predicate):
+    # Make less hacky
     return execute("""
     SELECT
         name, CONCAT(type1, type2)
@@ -49,9 +50,11 @@ def insert_types(name, defenders, attackers):
     INSERT INTO Matchups (attacker, defender, advantage)
     VALUES (:attacker, :defender, :advantage);
     """
-    for t, adv in defenders:
-        execute(sql, attacker=type_id, defender=t, advantage=adv)
-    for t, adv in attackers:
-        execute(sql, attacker=t, defender=type_id, advantage=adv)
+    for adv, types in defenders:
+        for t in types:
+            execute(sql, attacker=type_id, defender=t, advantage=adv)
+    for adv, types in attackers:
+        for t in types:
+            execute(sql, attacker=t, defender=type_id, advantage=adv)
     commit()
 
