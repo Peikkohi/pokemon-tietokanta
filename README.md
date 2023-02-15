@@ -24,9 +24,8 @@ Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`
 - [x] Pokémoneille voi lisätä Kehittymisiä (Mistä, Mihin, Kehitystaso/-kuvaus)
 
 ## Tietokannasta tiedon hakeminen
-- [ ] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen
-  - [x] Voi laittaa SQL totuuslausekkeen (URL: /search/[name='Charizard'])
-  - [ ] Hakemiskenttä
+- [x] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen
 - [ ] Pokémonilta voi hakea kehitysmuodot
+  - [x] Pokémonin voi hakea. Myöhemmin kehitysmuoto näkyy siellä `/pokémon/`
 - [ ] Iskuja voi hakea predikaatin suhteen
 - [ ] Hakujen tulokset voi uudelleenjärjestää ominaisuuden suhteen

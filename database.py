@@ -11,12 +11,41 @@ def filter(predicate):
     # Make less hacky
     return execute("""
     SELECT
-        name, CONCAT(type1, type2)
+        name,
+        CONCAT(
+            (SELECT name FROM Types WHERE id=type1),
+            ' ',
+            (SELECT name FROM Types WHERE id=type2)
+        ),
+        health,
+        attack,
+        defence,
+        spc_att,
+        spc_def,
+        speed
     FROM Pokemon WHERE %s;
     """ % predicate).fetchall()
 
-def pokemon():
+def pokemons():
     return execute("SELECT id, name FROM Pokemon;").fetchall()
+
+def pokemon(name):
+    return execute("""
+    SELECT
+        name,
+        CONCAT(
+            (SELECT name FROM Types WHERE id=type1),
+            ' ',
+            (SELECT name FROM Types WHERE id=type2)
+        ),
+        health,
+        attack,
+        defence,
+        spc_att,
+        spc_def,
+        speed
+    FROM Pokemon WHERE name=:name;
+    """, name=name)
 
 def insert_pokemon(**kwargs):
     execute("""

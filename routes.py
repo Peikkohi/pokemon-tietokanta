@@ -12,7 +12,6 @@ def index():
         ("new/type", "Lisää tyypitys"),
     ])
 
-@app.route("/search/<predicate>")
 def search(predicate):
     for char in ";()":
         if char in predicate:
@@ -20,6 +19,16 @@ def search(predicate):
     
     pokemon = database.filter(predicate)
     return render_template("show-table.html", query=pokemon)
+
+app.add_url_rule("/search/<predicate>", view_func=search)
+
+@app.route("/search", methods=["POST"])
+def search_():
+    return search(request.form.get("query"))
+
+@app.route("/pokémon/<name>")
+def pokemon(name):
+    return render_template("show-table.html", query=database.pokemon(name))
 
 @app.route("/new/move")
 def new():
@@ -42,7 +51,7 @@ def new_evolution():
     return render_template(
         "form-evolution.html",
         action="send/evolution",
-        pokemon=database.pokemon(),
+        pokemon=database.pokemons(),
     )
 
 @app.route("/new/type")

@@ -1,3 +1,9 @@
+<div>
 {% for link, name in links %}
 <a href="{{ link }}">{{ name }}</a>
 {% endfor %}
+</div>
+<form action="/search" method="POST">
+	Predikaatti: <input type="text" name="query" placeholder="name='Charizard'">
+	<input type="submit" value="Hae">
+</form>
