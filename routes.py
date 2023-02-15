@@ -23,7 +23,11 @@ def search(predicate):
 
 @app.route("/new/move")
 def new():
-    return render_template("form-move.html", action="send/move")
+    return render_template(
+        "form-move.html",
+        action="send/move",
+        types=database.types(),
+    )
 
 @app.route("/new/pokémon")
 def new_pokemon():

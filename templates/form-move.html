@@ -3,6 +3,19 @@
 <h2>{% block title %}Lisää liikkeen tiedot{% endblock %}</h2>
 <p>Liikkeen nimi:<br>
 <input type="text" name="name"> 
+<p>Liikkeen tyypitys
+<select name="typing">
+{% for id, name in types %}
+	<option value="{{ id }}">{{ name }}</option>
+{% endfor %}
+</select>
+<p>Liikkeen voimakkuus:<br>
+<input type="number" name="force">
+<p>Liikkeen määrä:<br>
+<input type="number" name="amount">
+<p>Liikkeen tarkkuus:<br>
+<input type="number" name="accuracy">
 <p>Mitä liike tekee:<br>
-<input type="text" name="description">
+<input type="text" name="effect">
+
 {% endblock %}

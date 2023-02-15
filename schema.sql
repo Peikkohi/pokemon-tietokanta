@@ -28,7 +28,11 @@ CREATE TABLE Pokemon (
 CREATE TABLE Moves (
 	id SERIAL PRIMARY KEY,
 	name TEXT,
-	description TEXT
+	typing SERIAL REFERENCES Types,
+	force INTEGER,
+	amount INTEGER,
+	accuracy INTEGER,
+	effect TEXT
 );
 CREATE TABLE Evolutions (
 	child SERIAL REFERENCES Pokemon,

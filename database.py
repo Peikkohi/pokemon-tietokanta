@@ -32,8 +32,11 @@ def insert_pokemon(**kwargs):
 
 def insert_moves(**kwargs):
     execute("""
-    INSERT INTO Moves (name, description)
-    VALUES (:name, :description);
+    INSERT INTO Moves (
+        name, typing, force, amount, accuracy, effect
+    ) VALUES (
+        :name, :typing, :force, :amount, :accuracy, :effect
+    );
     """, **kwargs)
     commit()
 

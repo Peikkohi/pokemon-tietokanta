@@ -13,11 +13,12 @@ Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`
 ## Tietokantaan tiedon lisäämiset
 - [ ] Tietokantaan voi lisätä Pokèmoneja - Laji, Tyyppi1, Tyyppi2, Kyky1, Kyky2, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys
   - [x] Laji
-  - [x] Tyyppi1 ja tyyppi2 (mietin että tän voi erotella omaksi listaksi, koska kaikilla pokémoneilla ei oo kahta tyyppiä :S)
-  - [ ] Kyvyt (sama on siis kyvyillä)
+  - [x] Tyyppi1 ja tyyppi2 
+  - [ ] Kyvyt 
   - [x] Tilastot
 - [ ] Tietokantaan voi lisätä Kykyjä - Nimi, [Kuvaus]
-- [ ] Tietokantaan voi lisätä Iskuja (Tyyppi, Voima, Osumisen todennäköisyys, Vaikutuksen todennäköisyys, Vaikutus)
+- [ ] Tietokantaan voi lisätä Iskuja - Nimi, Tyyppi, Voima, Määrä, Tarkkuus, Vaikutuksen todennäköisyys, Vaikutus)
+  - [x] Nimi, Tyyppi, Voima, Määrä, Tarkkuus, Vaikutus (teksti)
 - [ ] Tietokantaan voi lisätä Iskun vaikutuksia (Kuvaus)
 - [ ] Pokémoneille voi lisätä Iskuja (Pokémon, Isku, Oppimistaso)
 - [x] Pokémoneille voi lisätä Kehittymisiä (Mistä, Mihin, Kehitystaso/-kuvaus)
