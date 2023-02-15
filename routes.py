@@ -27,7 +27,11 @@ def new():
 
 @app.route("/new/pokémon")
 def new_pokemon():
-    return render_template("form-pokémon.html", action="send/pokémon")
+    return render_template(
+        "form-pokémon.html",
+        action="send/pokémon",
+        types=database.types(),
+    )
 
 @app.route("/new/evolution")
 def new_evolution():

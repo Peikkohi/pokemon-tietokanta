@@ -3,10 +3,18 @@
 <h2>{% block title %}Lisää Pokémon tiedot{% endblock %}</h2>
 <p>Nimi<br>
 <input type="text" name="name">
-<p>Ensisijainen tyypitys<br>
-<input type="text" name="type1">
-<p>Toissijainen tyypitys<br>
-<input type="text" name="type2">
+<p>Ensisijainen tyypitys
+<select name="type1">
+{% for id, name in types %}
+	<option value="{{ id }}">{{ name }}</option>
+{% endfor %}
+</select>
+<p>Toissijainen tyypitys
+<select name="type2">
+{% for id, name in types %}
+	<option value="{{ id }}">{{ name }}</option>
+{% endfor %}
+</select>
 <table>
 	<tr>
 		<td>Health</td>
