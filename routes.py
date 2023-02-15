@@ -81,6 +81,7 @@ def send_evolution():
 def send_type():
     database.insert_types(
         name=request.form["name"],
+        self=request.form["self"],
         defenders=(
             (True, request.form.getlist("effective")),
             (False, request.form.getlist("ineffective")),
