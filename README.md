@@ -8,7 +8,7 @@ Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on poké
 4. Alusta tietokannan taulukot: `psql -d [tietokanta] < schema.sql`
 5. Käynnistä komennolla: `flask run`
 
-Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`
+Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`. En saata toimia tällä hetkellä, joten joutuu lisäämään arvot sovelluksessa :S
 
 ## Tietokantaan tiedon lisäämiset
 - [ ] Tietokantaan voi lisätä Pokèmoneja - Laji, Tyyppi1, Tyyppi2, Kyky1, Kyky2, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys
@@ -26,6 +26,9 @@ Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`
 ## Tietokannasta tiedon hakeminen
 - [x] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen
 - [ ] Pokémonilta voi hakea kehitysmuodot
-  - [x] Pokémonin voi hakea. Myöhemmin kehitysmuoto näkyy siellä `/pokémon/`
+  - [x] Pokémonin voi hakea. Myöhemmin kehitysmuoto näkyy siellä `/pokémon/[name]`
 - [ ] Iskuja voi hakea predikaatin suhteen
 - [ ] Hakujen tulokset voi uudelleenjärjestää ominaisuuden suhteen
+
+## Muita kommentteja
+Alkuperäisessä suunnitelmassa ei ollut taulukkoja tyypityksille ja tajusin et mulle on tärkeempi saada sen ominaisuudet (kuin esim iskut). Siihen liittyy myös tyyppien hyvyys toisiinsa, johon oon upottanut aikaa

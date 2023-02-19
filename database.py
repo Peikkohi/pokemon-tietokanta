@@ -69,7 +69,7 @@ def insert_moves(**kwargs):
     """, **kwargs)
     commit()
 
-def insert_evolutions(**kwargs):
+def insert_evolution(**kwargs):
     execute("""
     INSERT INTO Evolutions (child, parent, lvl)
     VALUES (:child, :parent, :lvl);
