@@ -19,7 +19,7 @@ Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`. Ei saat
 
 ## Tietokannasta tiedon hakeminen
 - [x] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen - Tällä hetkellä toimii lisäämällä sql kyselyyn `where` kohtaan juttuja
-- [ ] Voi katsoa pokémonin heikkoudet eli tyypit joille pokémon on heikko.
+- [x] Voi katsoa pokémonin heikkoudet eli tyypit joille pokémon on heikko.
 - [ ] Voi katsoa pokémonin kehitykset
 - [x] Taulukko, jossa näkyy kaikkien tyyppien vaikutukset toisiinsa.
 

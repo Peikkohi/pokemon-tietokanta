@@ -20,17 +20,13 @@ def search(predicate):
     pokemon = database.filter(predicate)
     if not pokemon:
         return render_template("invalid-syntax.html")
-    return render_template("show-table.html", query=pokemon)
+    return render_template("table-pokemon.html", query=pokemon)
 
 app.add_url_rule("/search/<predicate>", view_func=search)
 
 @app.route("/search", methods=["POST"])
 def search_():
     return search(request.form.get("query"))
-
-@app.route("/pokémon/<name>")
-def pokemon(name):
-    return render_template("show-table.html", query=database.pokemon(name))
 
 @app.route("/matchups")
 def matchups():

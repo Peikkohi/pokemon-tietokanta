@@ -15,34 +15,33 @@ def filter(predicate):
         res = execute("""
         SELECT
             name,
+            (SELECT STRING_AGG((SELECT name FROM Types WHERE id=type_id), ' ')
+            FROM Typing
+            WHERE pokemon_id=id),
+            (SELECT
+                STRING_AGG(DISTINCT (SELECT name FROM Types WHERE id=attacker), ' ')
+            FROM Typing, Matchups WHERE pokemon_id=id AND defender=type_id AND advantage),
+            (SELECT
+                STRING_AGG(DISTINCT (SELECT name FROM Types WHERE id=attacker), ' ')
+            FROM Typing, Matchups WHERE pokemon_id=id AND defender=type_id AND NOT advantage),
             health,
             attack,
             defence,
             special_attack,
             special_defence,
-            speed
+            speed,
+            health + attack + defence +
+            special_attack + special_defence + speed
         FROM Pokemon WHERE %s;
         """ % predicate)
         return res.fetchall()
-    except ProgrammingError:
+    except ProgrammingError as pg:
+        print(pg)
         return None
 
 
 def pokemons():
     return execute("SELECT id, name FROM Pokemon;").fetchall()
-
-def pokemon(name):
-    return execute("""
-    SELECT
-        name,
-        health,
-        attack,
-        defence,
-        special_attack,
-        special_defence,
-        speed
-    FROM Pokemon WHERE name=:name;
-    """, name=name)
 
 def insert_pokemon(**kwargs):
     ret = execute("""
