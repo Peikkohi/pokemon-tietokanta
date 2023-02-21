@@ -1,5 +1,5 @@
 # Pokémon tietokanta (Pokédex?)
-Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on pokémon fanipelin "infinite fusion" pelaamiseen.
+Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on pokémon fanipelin "infinite fusion" pelaamiseen. Olen muuttamassa sovelluksen rakennetta. Sovellus ei tule sisältämään iskuja, niiden oppimista ja kykyjä, mutta tilalle taulut tyypitykset, niiden teho toisiinsa ja mitkä tyypit pokemonilla on. Tämä pitää taulujen määrä kurssin halutussa viidessä (jos muistan ohjeet oikein) ja on ominaisuudet, jotka itse haluan sovellukselta.
 
 ## Sovelluksen käyttöönotto
 1. Lataa vaatimukset: `pip3 install -r requirements.txt`
@@ -8,27 +8,22 @@ Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on poké
 4. Alusta tietokannan taulukot: `psql -d [tietokanta] < schema.sql`
 5. Käynnistä komennolla: `flask run`
 
-Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`. En saata toimia tällä hetkellä, joten joutuu lisäämään arvot sovelluksessa :S
+Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`. Ei saata toimia tällä hetkellä, joten joutuu lisäämään arvot sovelluksessa :S
 
 ## Tietokantaan tiedon lisäämiset
-- [ ] Tietokantaan voi lisätä Pokèmoneja - Laji, Tyyppi1, Tyyppi2, Kyky1, Kyky2, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys
-  - [x] Laji
-  - [x] Tyyppi1 ja tyyppi2 
-  - [ ] Kyvyt 
-  - [x] Tilastot
-- [ ] Tietokantaan voi lisätä Kykyjä - Nimi, [Kuvaus]
-- [ ] Tietokantaan voi lisätä Iskuja - Nimi, Tyyppi, Voima, Määrä, Tarkkuus, Vaikutuksen todennäköisyys, Vaikutus)
-  - [x] Nimi, Tyyppi, Voima, Määrä, Tarkkuus, Vaikutus (teksti)
-- [ ] Tietokantaan voi lisätä Iskun vaikutuksia (Kuvaus)
-- [ ] Pokémoneille voi lisätä Iskuja (Pokémon, Isku, Oppimistaso)
+- [x] Tietokantaan voi lisätä Pokèmoneja - Laji, Tyyppi1, Tyyppi2, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys
 - [x] Pokémoneille voi lisätä Kehittymisiä (Mistä, Mihin, Kehitystaso/-kuvaus)
+- [ ] Pokémoneille voi lisätä tyypityksiä yhdestä kahteen
+- [x] Tietokantaan voi lisätä Iskuja - Nimi, Tyyppi, Voima, Määrä, Tarkkuus, Vaikutus (teksti)
+- [x] Tietokantaan voi lisätä Tyypityksiä - Nimi
+- [x] Tietokantaan voi lisätä tyypitysten vaikutukset toisiinsa - Hyökkääjä, Puolustaja, Vaikutuksen teho (Onko hyvä? -> muuten huono)
 
 ## Tietokannasta tiedon hakeminen
-- [x] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen
-- [ ] Pokémonilta voi hakea kehitysmuodot
-  - [x] Pokémonin voi hakea. Myöhemmin kehitysmuoto näkyy siellä `/pokémon/[name]`
-- [ ] Iskuja voi hakea predikaatin suhteen
+- [x] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen - Tällä hetkellä toimii lisäämällä sql kyselyyn `where` kohtaan juttuja
+- [ ] Voi katsoa pokémonin heikkoudet eli tyypit joille pokémon on heikko.
+- [ ] Voi katsoa pokémonin kehitykset
+- [ ] Taulukko, jossa näkyy kaikkien tyyppien vaikutukset toisiinsa.
+
+## Tulevaisuuden lisäyksiä
 - [ ] Hakujen tulokset voi uudelleenjärjestää ominaisuuden suhteen
 
-## Muita kommentteja
-Alkuperäisessä suunnitelmassa ei ollut taulukkoja tyypityksille ja tajusin et mulle on tärkeempi saada sen ominaisuudet (kuin esim iskut). Siihen liittyy myös tyyppien hyvyys toisiinsa, johon oon upottanut aikaa
