@@ -1,5 +1,6 @@
 from app import db
 from sqlalchemy.sql import text
+from sqlalchemy.exc import ProgrammingError
 
 def execute(query, **kwargs):
     return db.session.execute(text(query), kwargs)
@@ -9,22 +10,27 @@ def commit():
 
 def filter(predicate):
     # TODO Make less hacky
-    return execute("""
-    SELECT
-        name,
-        CONCAT(
-            (SELECT name FROM Types WHERE id=type1),
-            ' ',
-            (SELECT name FROM Types WHERE id=type2)
-        ),
-        health,
-        attack,
-        defence,
-        spc_att,
-        spc_def,
-        speed
-    FROM Pokemon WHERE %s;
-    """ % predicate).fetchall()
+    try:
+        res = execute("""
+        SELECT
+            name,
+            CONCAT(
+                (SELECT name FROM Types WHERE id=type1),
+                ' ',
+                (SELECT name FROM Types WHERE id=type2)
+            ),
+            health,
+            attack,
+            defence,
+            spc_att,
+            spc_def,
+            speed
+        FROM Pokemon WHERE %s;
+        """ % predicate)
+        return res.fetchall()
+    except ProgrammingError:
+        return None
+
 
 def pokemons():
     return execute("SELECT id, name FROM Pokemon;").fetchall()

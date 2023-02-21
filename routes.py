@@ -15,9 +15,11 @@ def index():
 def search(predicate):
     for char in ";()":
         if char in predicate:
-            return "predicate contains: " + char
+            return render_template("invalid-syntax.html")
     
     pokemon = database.filter(predicate)
+    if not pokemon:
+        return render_template("invalid-syntax.html")
     return render_template("show-table.html", query=pokemon)
 
 app.add_url_rule("/search/<predicate>", view_func=search)
