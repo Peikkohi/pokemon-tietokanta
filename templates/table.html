@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <style>
 table, th, td {
 	margin: 3px;
@@ -5,6 +6,7 @@ table, th, td {
 }
 </style>
 <table>
+{% block titles %}{% endblock %}
 {% for row in query %}
 <tr>
 	{% for field in row %}	
