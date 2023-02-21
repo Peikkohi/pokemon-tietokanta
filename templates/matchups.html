@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<table>
+	<tr>
+		<th>
+			Defender →</br>
+			Attacker ↓
+		</th>
+		{% for _, t in types %}
+		<th>{{ t }}</th>
+		{% endfor %}
+	</tr>
+	{% for t, against in matchups %}
+	<tr>
+		<th>{{ t }}</th>
+		{% for effectiveness in against %}
+		<td>{{ effectiveness }}</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+</table>
+<a href="/">Takaisin<a>

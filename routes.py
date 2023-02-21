@@ -32,6 +32,16 @@ def search_():
 def pokemon(name):
     return render_template("show-table.html", query=database.pokemon(name))
 
+@app.route("/matchups")
+def matchups():
+    types = database.types()
+    matchups = database.matchups()
+    return render_template(
+        "matchups.html",
+        types=types,
+        matchups=matchups
+    )
+
 @app.route("/new/move")
 def new():
     return render_template(

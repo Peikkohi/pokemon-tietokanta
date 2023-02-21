@@ -1,4 +1,5 @@
 from app import db
+from itertools import groupby
 from sqlalchemy.sql import text
 from sqlalchemy.exc import ProgrammingError
 
@@ -83,7 +84,7 @@ def insert_evolution(**kwargs):
     commit()
 
 def types():
-    return execute("SELECT id, name FROM Types").fetchall()
+    return execute("SELECT id, name FROM Types ORDER BY id").fetchall()
 
 def insert_types(name, self, defenders, attackers):
     sql = "INSERT INTO Types (name) VALUES (:name) RETURNING id"
@@ -104,3 +105,20 @@ def insert_types(name, self, defenders, attackers):
             execute(sql, attacker=t, defender=type_id, advantage=adv)
     commit()
 
+def matchups():
+    sql = """
+    SELECT
+        A.name, B.name,
+        CASE (SELECT advantage FROM Matchups WHERE attacker=A.id AND defender=B.id)
+        WHEN TRUE THEN 1
+        WHEN FALSE THEN -1
+        ELSE 0
+        END
+    FROM
+        Types A, Types B
+    ORDER BY
+        A.id, B.id;
+    """
+    res = execute(sql).fetchall()
+    return [(val, [effectiveness for _, _, effectiveness in it])
+            for val, it in groupby(res, key=lambda n: n[0])]
