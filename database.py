@@ -15,16 +15,11 @@ def filter(predicate):
         res = execute("""
         SELECT
             name,
-            CONCAT(
-                (SELECT name FROM Types WHERE id=type1),
-                ' ',
-                (SELECT name FROM Types WHERE id=type2)
-            ),
             health,
             attack,
             defence,
-            spc_att,
-            spc_def,
+            special_attack,
+            special_defence,
             speed
         FROM Pokemon WHERE %s;
         """ % predicate)
@@ -40,29 +35,34 @@ def pokemon(name):
     return execute("""
     SELECT
         name,
-        CONCAT(
-            (SELECT name FROM Types WHERE id=type1),
-            ' ',
-            (SELECT name FROM Types WHERE id=type2)
-        ),
         health,
         attack,
         defence,
-        spc_att,
-        spc_def,
+        special_attack,
+        special_defence,
         speed
     FROM Pokemon WHERE name=:name;
     """, name=name)
 
 def insert_pokemon(**kwargs):
-    execute("""
+    ret = execute("""
     INSERT INTO Pokemon (
-        name, type1, type2,
-        health, attack, defence, spc_att, spc_def, speed
+        name, health, attack, defence,
+        special_attack, special_defence, speed
     ) VALUES (
-        :name, :type1, :type2,
-        :health, :attack, :defence, :spc_att, :spc_def, :speed
-    );
+        :name, :health, :attack, :defence,
+        :special_attack, :special_defence, :speed
+    ) RETURNING id;
+    """, **kwargs).fetchone()[0]
+    commit()
+    return ret
+
+def insert_typing(**kwargs):
+    execute("""
+    INSERT INTO Typing
+        (pokemon_id, type_id, is_primary)
+    VALUES
+        (:pokemon_id, :type_id, :is_primary);
     """, **kwargs)
     commit()
 
@@ -78,8 +78,8 @@ def insert_moves(**kwargs):
 
 def insert_evolution(**kwargs):
     execute("""
-    INSERT INTO Evolutions (child, parent, lvl)
-    VALUES (:child, :parent, :lvl);
+    INSERT INTO Evolutions (child, parent, requirement)
+    VALUES (:child, :parent, :requirement);
     """, **kwargs)
     commit()
 

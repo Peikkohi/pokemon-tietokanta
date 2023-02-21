@@ -3,18 +3,8 @@
 <h2>{% block title %}Lisää Pokémon tiedot{% endblock %}</h2>
 <p>Nimi<br>
 <input type="text" name="name">
-<p>Ensisijainen tyypitys
-<select name="type1">
-{% for id, name in types %}
-	<option value="{{ id }}">{{ name }}</option>
-{% endfor %}
-</select>
-<p>Toissijainen tyypitys
-<select name="type2">
-{% for id, name in types %}
-	<option value="{{ id }}">{{ name }}</option>
-{% endfor %}
-</select>
+<p>Useampi tyypitys
+<input type="checkbox" name="many_types" value="yes">
 <table>
 	<tr>
 		<td>Health</td>
@@ -30,11 +20,11 @@
 	</tr>
 	<tr>
 		<td>Special Attack</td>
-		<td><input type="number" name="spc_att"></td>
+		<td><input type="number" name="special_attack"></td>
 	</tr>
 	<tr>
 		<td>Special Defence</td>
-		<td><input type="number" name="spc_def"></td>
+		<td><input type="number" name="special_defence"></td>
 	</tr>
 	<tr>
 		<td>Speed</td>

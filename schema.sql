@@ -1,6 +1,6 @@
 CREATE TABLE Types (
 	id SERIAL PRIMARY KEY,
-	name TEXT
+	name TEXT UNIQUE
 );
 CREATE TABLE Matchups (
 	attacker SERIAL REFERENCES Types,
@@ -10,33 +10,22 @@ CREATE TABLE Matchups (
 );
 CREATE TABLE Pokemon (
 	id SERIAL PRIMARY KEY,
-	name TEXT,
-	type1 SERIAL REFERENCES Types,
-	type2 SERIAL REFERENCES Types,
-	--ability1 TEXT,
-	--ability2 TEXT,
+	name TEXT UNIQUE,
 	health INTEGER,
 	attack INTEGER,
 	defence INTEGER,
-	spc_att INTEGER,
-	spc_def INTEGER,
+	special_attack INTEGER,
+	special_defence INTEGER,
 	speed INTEGER
-);
---CREATE TABLE Abilities (
-	--id SERIAL PRIMARY KEY,
-	--name TEXT
---);
-CREATE TABLE Moves (
-	id SERIAL PRIMARY KEY,
-	name TEXT,
-	typing SERIAL REFERENCES Types,
-	force INTEGER,
-	amount INTEGER,
-	accuracy INTEGER,
-	effect TEXT
 );
 CREATE TABLE Evolutions (
 	child SERIAL REFERENCES Pokemon,
 	parent SERIAL REFERENCES Pokemon,
-	lvl INTEGER
+	requirement INTEGER
 );
+CREATE TABLE Typing (
+	pokemon_id SERIAL REFERENCES Pokemon,
+	type_id SERIAL REFERENCES Types,
+	is_primary BOOLEAN,
+	PRIMARY KEY (pokemon_id, type_id, is_primary)
+)

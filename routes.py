@@ -55,8 +55,11 @@ def new_pokemon():
     return render_template(
         "form-pokémon.html",
         action="send/pokémon",
-        types=database.types(),
     )
+
+@app.route("/new/typing", methods=["POST"])
+def new_typing():
+    pass
 
 @app.route("/new/evolution")
 def new_evolution():
@@ -76,7 +79,19 @@ def new_type():
 
 @app.route("/send/pokémon", methods=["POST"])
 def send_pokemon():
-    database.insert_pokemon(**request.form)
+    i = database.insert_pokemon(**request.form)
+    return render_template(
+        "form-typing.html",
+        action="send/typing/%d" % i,
+        types=database.types(),
+        many_types=request.form.get("many_types") != None,
+    )
+
+@app.route("/send/typing/<int:i>", methods=["POST"])
+def send_typing(i):
+    database.insert_typing(pokemon_id=i, type_id=request.form["primary"], is_primary=True)
+    if request.form.get("secondary"):
+        database.insert_typing(pokemon_id=i, type_id=request.form["secondary"], is_primary=False)
     return redirect("/")
 
 @app.route("/send/move", methods=["POST"])
@@ -93,7 +108,7 @@ def send_evolution():
 def send_type():
     database.insert_types(
         name=request.form["name"],
-        self=request.form["self"],
+        self=request.form.get("self"),
         defenders=(
             (True, request.form.getlist("effective")),
             (False, request.form.getlist("ineffective")),

@@ -1,0 +1,16 @@
+{% extends "form.html" %}
+{% block rest %}
+<h2>{% block title %}Lisää Pokémonin tyypityksen tiedot{% endblock %}</h2>
+<select name="primary">
+	{% for i, t in types %}
+	<option value="{{ i }}">{{ t }}</option>
+	{% endfor %}
+</select>
+{% if many_types %}
+<select name="secondary">
+	{% for i, t in types %}
+	<option value="{{ i }}">{{ t }}</option>
+	{% endfor %}
+</select>
+{% endif %}
+{% endblock %}

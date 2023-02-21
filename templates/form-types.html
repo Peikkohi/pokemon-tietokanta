@@ -3,7 +3,6 @@
 <h2>{% block title %}Lisää tyypityksen tiedot{% endblock %}</h2>
 <p>Tyypin nimi</p>
 <input type="text" name="name"> 
-{% if types %}
 <p>Teho itseensä</p>
 <label>Samantekevä</label>
 <input type="radio" name="self" value="ok">
@@ -12,6 +11,7 @@
 <label>Huono</label>
 <input type="radio" name="self" value="bad">
 
+{% if types %}
 <p>Hyökätessä</p>
 <p>Hyvä - Huono</p>
 {% endif %}

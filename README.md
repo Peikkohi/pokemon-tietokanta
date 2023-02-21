@@ -11,10 +11,9 @@ Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on poké
 Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`. Ei saata toimia tällä hetkellä, joten joutuu lisäämään arvot sovelluksessa :S
 
 ## Tietokantaan tiedon lisäämiset
-- [x] Tietokantaan voi lisätä Pokèmoneja - Laji, Tyyppi1, Tyyppi2, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys
-- [x] Pokémoneille voi lisätä Kehittymisiä (Mistä, Mihin, Kehitystaso/-kuvaus)
-- [ ] Pokémoneille voi lisätä tyypityksiä yhdestä kahteen
-- [x] Tietokantaan voi lisätä Iskuja - Nimi, Tyyppi, Voima, Määrä, Tarkkuus, Vaikutus (teksti)
+- [x] Tietokantaan voi lisätä Pokèmoneja - Laji, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys
+- [x] Pokémoneille voi lisätä Kehittymisiä - Mistä, Mihin, Kehitystaso
+- [x] Pokémoneille voi lisätä yhdestä kahteen tyypitystä
 - [x] Tietokantaan voi lisätä Tyypityksiä - Nimi
 - [x] Tietokantaan voi lisätä tyypitysten vaikutukset toisiinsa - Hyökkääjä, Puolustaja, Vaikutuksen teho (Onko hyvä? -> muuten huono)
 
@@ -22,8 +21,9 @@ Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`. Ei saat
 - [x] Pokèmoneja voi hakea predikaatin (totuuslausekkeen) suhteen - Tällä hetkellä toimii lisäämällä sql kyselyyn `where` kohtaan juttuja
 - [ ] Voi katsoa pokémonin heikkoudet eli tyypit joille pokémon on heikko.
 - [ ] Voi katsoa pokémonin kehitykset
-- [ ] Taulukko, jossa näkyy kaikkien tyyppien vaikutukset toisiinsa.
+- [x] Taulukko, jossa näkyy kaikkien tyyppien vaikutukset toisiinsa.
 
 ## Tulevaisuuden lisäyksiä
+- [x] Tietokantaan voi lisätä Iskuja - Nimi, Tyyppi, Voima, Määrä, Tarkkuus, Vaikutus (teksti)
 - [ ] Hakujen tulokset voi uudelleenjärjestää ominaisuuden suhteen
 
