@@ -18,12 +18,12 @@ def filter(predicate):
             (SELECT STRING_AGG((SELECT name FROM Types WHERE id=type_id), ' ')
             FROM Typing
             WHERE pokemon_id=id),
-            (SELECT
+            COALESCE((SELECT
                 STRING_AGG(DISTINCT (SELECT name FROM Types WHERE id=attacker), ' ')
-            FROM Typing, Matchups WHERE pokemon_id=id AND defender=type_id AND advantage),
-            (SELECT
+            FROM Typing, Matchups WHERE pokemon_id=id AND defender=type_id AND advantage), ''),
+            COALESCE((SELECT
                 STRING_AGG(DISTINCT (SELECT name FROM Types WHERE id=attacker), ' ')
-            FROM Typing, Matchups WHERE pokemon_id=id AND defender=type_id AND NOT advantage),
+            FROM Typing, Matchups WHERE pokemon_id=id AND defender=type_id AND NOT advantage), ''),
             health,
             attack,
             defence,
@@ -31,7 +31,13 @@ def filter(predicate):
             special_defence,
             speed,
             health + attack + defence +
-            special_attack + special_defence + speed
+            special_attack + special_defence + speed,
+            COALESCE((SELECT
+                CONCAT((SELECT name FROM Pokemon WHERE id=child), ': ', requirement)
+            FROM Evolutions WHERE parent=id), ''),
+            COALESCE((SELECT
+                CONCAT((SELECT name FROM Pokemon WHERE id=parent), ': ', requirement)
+            FROM Evolutions WHERE child=id), '')
         FROM Pokemon WHERE %s;
         """ % predicate)
         return res.fetchall()
