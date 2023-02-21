@@ -1,4 +1,5 @@
 from flask import redirect, render_template, request
+from sqlalchemy.exc import ProgrammingError
 
 from app import app
 import database
@@ -16,10 +17,10 @@ def search(predicate):
     for char in ";()":
         if char in predicate:
             return render_template("invalid-syntax.html")
-    
-    pokemon = database.filter(predicate)
-    if not pokemon:
-        return render_template("invalid-syntax.html")
+    try: 
+        pokemon = database.filter(predicate)
+    except ProgrammingError as pg:
+        return render_template("invalid-syntax.html", msg=str(pg))
     return render_template("table-pokemon.html", query=pokemon)
 
 app.add_url_rule("/search/<predicate>", view_func=search)
