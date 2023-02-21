@@ -1,5 +1,7 @@
 # Pokémon tietokanta (Pokédex?)
-Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on pokémon fanipelin "infinite fusion" pelaamiseen. Olen muuttamassa sovelluksen rakennetta. Sovellus ei tule sisältämään iskuja, niiden oppimista ja kykyjä, mutta tilalle taulut tyypitykset, niiden teho toisiinsa ja mitkä tyypit pokemonilla on. Tämä pitää taulujen määrä kurssin halutussa viidessä (jos muistan ohjeet oikein) ja on ominaisuudet, jotka itse haluan sovellukselta.
+Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on pokémon fanipelin "infinite fusion" pelaamiseen.
+
+Olen muuttanut sovelluksen rakennetta. Sovellus ei tule sisältämään iskuja, niiden oppimista ja kykyjä, mutta tilalle taulut tyypitykset, niiden teho toisiinsa ja mitkä tyypit pokemonilla on. Tämä pitää taulujen määrä kurssin halutussa viidessä (jos muistan ohjeet oikein) ja on ominaisuudet, jotka itse haluan sovellukselta.
 
 ## Sovelluksen käyttöönotto
 1. Lataa vaatimukset: `pip3 install -r requirements.txt`
@@ -8,7 +10,7 @@ Työkalu Pokémonien tietojen etsimiseen. Tarkoitettu käyttötarkoitus on poké
 4. Alusta tietokannan taulukot: `psql -d [tietokanta] < schema.sql`
 5. Käynnistä komennolla: `flask run`
 
-Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`. Ei saata toimia tällä hetkellä, joten joutuu lisäämään arvot sovelluksessa :S
+Voi myös lisätä kokeiludataa: `psql -d [tietokanta] < test-data.sql`.
 
 ## Tietokantaan tiedon lisäämiset
 - [x] Tietokantaan voi lisätä Pokèmoneja - Laji, Vireys, Voima, Kestävyys, Mielenvoima, Mielenkestävyys, Ketteryys

@@ -21,11 +21,12 @@ CREATE TABLE Pokemon (
 CREATE TABLE Evolutions (
 	child SERIAL REFERENCES Pokemon,
 	parent SERIAL REFERENCES Pokemon,
-	requirement INTEGER
+	requirement INTEGER,
+	PRIMARY KEY (child, parent)
 );
 CREATE TABLE Typing (
 	pokemon_id SERIAL REFERENCES Pokemon,
 	type_id SERIAL REFERENCES Types,
 	is_primary BOOLEAN,
-	PRIMARY KEY (pokemon_id, type_id, is_primary)
+	PRIMARY KEY (pokemon_id, is_primary)
 )
